@@ -1,0 +1,33 @@
+# Python / Virtual Environment
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+
+# Frontend build & dependencies
+frontend/node_modules/
+frontend/dist/
+
+# Obsolete SQLite databases & local artifacts
+*.db
+project40.db
+sql_app.db
+
+# ML Model binary artifacts (generated via training script)
+backend/app/ml/models/*.joblib
+
+# Legacy obsolete source folders
+src/
+
+# OS / Editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

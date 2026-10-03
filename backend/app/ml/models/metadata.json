@@ -1,0 +1,12 @@
+{
+  "model_type": "IsolationForest",
+  "training_timestamp": "2026-10-03T20:00:26.023971",
+  "training_record_count": 66,
+  "feature_count": 7,
+  "n_estimators": 100,
+  "contamination": 0.05,
+  "random_state": 42,
+  "sklearn_version": "1.9.1",
+  "numpy_version": "2.2.1",
+  "joblib_version": "1.4.2"
+}

@@ -1,0 +1,47 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: expense_auditor_backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg2://postgres:postgres@postgres:5432/expense_auditor
+      ENVIRONMENT: development
+      SECRET_KEY: your-super-secret-key-change-in-production
+    ports:
+      - "8000:8000"
+    restart: always
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: expense_auditor_frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+    restart: always
+  postgres:
+    image: postgres:15-alpine
+    container_name: expense_auditor_postgres
+    environment:
+      POSTGRES_DB: expense_auditor
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d expense_auditor"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+volumes:
+  postgres_data:
+    name: project-40_postgres_data
